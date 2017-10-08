@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Storage;
+use Uploader;
 use App\Product;
 use App\Category;
 use Illuminate\Http\Request;

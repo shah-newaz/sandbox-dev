@@ -42,16 +42,17 @@ class ProductsController extends Controller
 
     public function post(ProductRequest $request)
     {
-        $product = Product::firstOrNew(["id" => $request->get("id")]);       #$product = $request->get("id") ? Product::find($request->get("id")) : new Product
+        $product = Product::firstOrNew(["id" => $request->get("id")]);       
+        // $product = $request->get("id") ? Product::find($request->get("id")) : new Product
         $product->name = $request->get("name");
         $product->category_id = $request->get("category_id");
         $product->description = $request->get("description");
         $product->size = $request->get("size");
 
-        //If Image Was Provided
-        if($request->file("image"))
-        {
-            $product->image = upload($request->file("image", "products"));
+        // If Image Was Provided
+        if($request->file("image")) {
+            $uploadedFile = Uploader::upload($request->file('image'), 'products')->watermark();
+            $product->image = $uploadedFile->saveFileName;
         }
 
         $product->save();

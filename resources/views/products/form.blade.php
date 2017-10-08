@@ -55,6 +55,10 @@
 
         <div class="form-group">
             <label>Image</label><br/>
+
+            @if($product->image)
+                <img src="{{ productsImage($product->image) }}" class="img-thumbnail" style="width: 200px;">
+            @endif
             <input type="file" name="image" class="form-control @if($errors->has('image')) is-invalid @endif" />
 
             @if($errors->has("image"))

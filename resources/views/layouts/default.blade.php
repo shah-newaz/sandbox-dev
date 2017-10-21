@@ -19,12 +19,33 @@
       <li class="nav-item active">
         <a class="nav-link" href="{{ route('home') }}">Home <span class="sr-only">(current)</span></a>
       </li>
+      @if (auth()->user())
       <li class="nav-item">
         <a class="nav-link" href="{{ route('category.index') }}">Categories</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{{ route('product.index') }}">Products</a>
       </li>
+      @endif
+
+      @if(auth()->user())
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('user.logout') }}">Logout</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="#">Logged in as: {{ auth()->user()->first_name }}</a>
+        </li>
+      @else
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('login') }}">Login</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('user.register') }}">Register</a>
+        </li>
+      @endif
+
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">

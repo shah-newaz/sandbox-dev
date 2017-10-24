@@ -16,15 +16,41 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
+
       <li class="nav-item active">
         <a class="nav-link" href="{{ route('home') }}">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ route('category.index') }}">Categories</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ route('product.index') }}">Products</a>
-      </li>
+
+      @if(!auth()->user())
+
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('register') }}">Register</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('login') }}">Login</a>
+        </li>
+
+      @else
+
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('category.index') }}">Categories</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('product.index') }}">Products</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('logout') }}">Logout</a>
+        </li>
+
+        <li class="nav-item pull-right">
+          <a class="nav-link" href="#">Logged in as: {{ auth()->user()->name }}</a>
+        </li>
+
+      @endif
+
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
@@ -38,6 +64,11 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8">
+          
+            @if(session('error'))
+              <div class="alert alert-danger">{{ session('error') }}</div>
+            @endif
+
             @yield("content")
         </div>
         <div class="col-md-4">

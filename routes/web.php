@@ -18,6 +18,7 @@ Route::middleware('auth')->group(function () {
 
 	Route::get("/", "SandboxController@getSandbox")->name("home");
 	Route::get("/products", "ProductsController@index")->name("product.index");
+	Route::get("/products/download", "ProductsController@downloadProducts")->name("product.download");
 	Route::get("/product/new", "ProductsController@form")->name("product.new")->middleware('creator');
 	Route::get("/product/edit/{product}", "ProductsController@form")->name("product.edit");
 	Route::post("/product/delete/{product}", "ProductsController@delete")->name("product.delete");

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
 use Uploader;
 use App\Product;
 use App\Category;
@@ -64,6 +65,11 @@ class ProductsController extends Controller
     {
         $product->delete();
         return redirect()->back();
+    }
+
+    public function downloadProducts () {
+        $products = Product::all();
+        return PDF::loadView("products.download", ['products' => $products])->download('download.pdf');
     }
 
 }

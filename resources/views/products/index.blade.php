@@ -84,4 +84,5 @@
 
 @section("sidebar")
     <a href="{{ route('product.new')}}" class="btn btn-success"> Add New Product</a>
+    <a href="{{ route('product.download')}}" class="btn btn-success"> Download PDF</a>
 @stop
